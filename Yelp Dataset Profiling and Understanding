@@ -1,0 +1,400 @@
+Part 1: Yelp Dataset Profiling and Understanding
+
+1. Profile the data by finding the total number of records
+for each of the tables below:
+
+i. Attribute table = 10000
+ii. Business table = 10000
+iii. Category table = 10000
+iv. Checkin table = 10000
+v. elite_years table = 10000
+vi. friend table = 10000
+vii. hours table = 10000
+viii. photo table = 10000
+ix. review table = 10000
+x. tip table = 10000
+xi. user table = 10000
+
+2. Find the total distinct records by either the foreign
+key or primary key for each table. If two foreign keys are
+listed in the table, please specify which foreign key.
+
+i. Business = 10000 (primary key, id)
+ii. Hours = 1562 (foreign key, business_id)
+iii. Category = 2643 (foreign key, business_id)
+iv. Attribute = 1115 (foreign key, business_id)
+v. Review = 10000 (primary key, id)
+vi. Checkin = 493 (foreign key, business_id)
+vii. Photo = 10000 (primary key, id)
+viii. Tip = 3979 (foreign key, business_id)
+ix. User = 10000 (primary key, id)
+x. Friend = 11 (foreign key, user_id)
+xi. Elite_years = 2780 (foreign key, user_id)
+Note: Primary Keys are denoted in the ER-Diagram with a
+yellow key icon.
+
+3. Are there any columns with null values in the Users
+table? Indicate "yes," or "no."
+Answer:
+No
+
+SQL code used to arrive at answer:
+SELECT *
+FROM user
+WHERE id IS NULL
+
+4. For each table and column listed below, display the
+smallest (minimum), largest (maximum), and average (mean)
+value for the following fields:
+
+i. Table: Review, Column: Stars
+min: 1 max: 5 avg: 3.7082
+
+ii. Table: Business, Column: Stars
+min: 1.0 max: 5.0 avg: 3.6549
+
+iii. Table: Tip, Column: Likes
+min: 0 max: 2 avg: 0.0144
+
+iv. Table: Checkin, Column: Count
+min: 1 max: 53 avg: 1.9414
+
+v. Table: User, Column: Review_count
+min: 0 max: 2000 avg: 24.2995
+
+5. List the cities with the most reviews in descending
+order:
+SQL code used to arrive at answer:
+
+SELECT city,
+review_count
+FROM business
+GROUP BY city
+ORDER BY review_count DESC
+
+Copy and Paste the Result Below:
++------------------------+--------------+
+| city | review_count |
++------------------------+--------------+
+| Woodmere Village | 242 |
+| Mount Lebanon | 138 |
+| Charlotte | 120 |
+| McMurray | 112 |
+| North York | 109 |
+| Enterprise | 89 |
+| Matthews | 77 |
+| Munroe Falls | 74 |
+| Ahwatukee | 69 |
+| Pittsburgh | 68 |
+| Woodmere | 68 |
+| Tolleson | 65 |
+| Pineville | 63 |
+| Carnegie | 61 |
+| Macedonia | 58 |
+| Markham | 54 |
+| Whitchurch-Stouffville | 52 |
+| Windsor | 50 |
+| Goodyear | 49 |
+| Gibsonia | 45 |
+| Summerlin | 44 |
+| Peninsula | 42 |
+| Richfield | 42 |
+| Dormont | 40 |
+| nboulder city | 40 |
+
++------------------------+--------------+
+(Output limit exceeded, 25 of 362 total rows shown)
+
+6. Find the distribution of star ratings to the business in
+the following cities:
+i. Avon
+
+SQL code used to arrive at answer:
+SELECT stars,
+name
+FROM business
+WHERE city = "Avon";
+Copy and Paste the Resulting Table Below (2 columns â€
+“ star rating and count):
++-------
++-----------------------------------------------+
+| stars | name
+|
++-------
++-----------------------------------------------+
+| 2.5 | Helen & Kal's
+|
+| 4.0 | Marc's
+|
+| 5.0 | Hoban Pest Control
+|
+| 3.5 | Light Salon & Spa
+|
+| 1.5 | Portrait Innovations
+|
+| 3.5 | Winking Lizard Tavern
+|
+| 4.5 | Dervish Mediterranean & Turkish Grill
+
+|
+| 3.5 | Mulligans Pub and Grill
+|
+| 2.5 | Mr. Handyman of Cleveland's Northwest Suburbs
+|
+| 4.0 | Cambria hotel & suites Avon - Cleveland
+|
++-------
++-----------------------------------------------+
+ii. Beachwood
+SQL code used to arrive at answer:
+SELECT stars,
+name
+FROM business
+WHERE city = "Beachwood";
+
+Copy and Paste the Resulting Table Below (2 columns â€
+“ star rating and count):
++-------+---------------------------------+
+| stars | name |
++-------+---------------------------------+
+| 3.0 | Maltz Museum of Jewish Heritage |
+| 3.0 | Charley's Grilled Subs |
+| 4.5 | Sixth & Pine |
+| 5.0 | Beechmont Country Club |
+| 4.0 | Hyde Park Prime Steakhouse |
+| 4.5 | Origins |
+| 5.0 | Fyodor Bridal Atelier |
+| 2.0 | College Planning Network |
+| 3.5 | Lucky Brand Jeans |
+| 3.5 | American Eagle Outfitters |
+| 5.0 | Shaker Women's Wellness |
+| 2.5 | Avis Rent A Car |
+
+| 5.0 | Cleveland Acupuncture |
+| 5.0 | Studio Mz |
++-------+---------------------------------+
+
+7. Find the top 3 users based on their total number of
+reviews:
+Gerald, Sara, and Yuri
+
+SQL code used to arrive at answer:
+SELECT name, review_count
+FROM user
+ORDER BY review_count DESC
+
+Copy and Paste the Result Below:
++-----------+--------------+
+| name | review_count |
++-----------+--------------+
+| Gerald | 2000 |
+| Sara | 1629 |
+| Yuri | 1339 |
+| .Hon | 1246 |
+| William | 1215 |
+| Harald | 1153 |
+| eric | 1116 |
+| Roanna | 1039 |
+| Mimi | 968 |
+| Christine | 930 |
+| Ed | 904 |
+| Nicole | 864 |
+| Fran | 862 |
+| Mark | 861 |
+| Christina | 842 |
+| Dominic | 836 |
+| Lissa | 834 |
+
+| Lisa | 813 |
+| Alison | 775 |
+| Sui | 754 |
+| Tim | 702 |
+| L | 696 |
+| Angela | 694 |
+| Crissy | 676 |
+| Lyn | 675 |
++-----------+--------------+
+(Output limit exceeded, 25 of 10000 total rows shown)
+
+8. Does posing more reviews correlate with more fans?
+Please explain your findings and interpretation of the
+results:
+
+I pulled the name, review_count, and fans from the
+users tables and messed order with the order of the data to
+view the fan count of the users with the most reviews left
+vs. the users who’ve left little to no reviews. The users
+who posted lots of reviews were more likely to have fans
+but there wasn’t a direct correlation between review_count
+and fans. Based on the data I would assume you’re more
+likely to gain fans from leaving lots of reviews than not
+leaving any reviews.
+
+9. Are there more reviews with the word "love" or with the
+word "hate" in them?
+
+Answer:
+Yes. There were 1780 total rows with the word “love” and
+only 232 total rows with the word “hate” in them.
+
+SQL code used to arrive at answer:
+SELECT business_id, text
+
+FROM review
+WHERE text LIKE '%love%'
+
+SELECT business_id, text
+FROM review
+WHERE text LIKE ‘%hate%’
+
+10. Find the top 10 users with the most fans:
+Amy, Mimi, Harold, Gerald, Christine, Lisa, Cat, William,
+Fran and Lissa
+
+SQL code used to arrive at answer:
+SELECT name, fans
+FROM user
+ORDER BY fans DESC
+LIMIT 10
+
+Copy and Paste the Result Below:
++-----------+------+
+| name | fans |
++-----------+------+
+| Amy | 503 |
+| Mimi | 497 |
+| Harald | 311 |
+| Gerald | 253 |
+| Christine | 173 |
+| Lisa | 159 |
+| Cat | 133 |
+| William | 126 |
+| Fran | 124 |
+| Lissa | 120 |
++-----------+------+
+
+Part 2: Inferences and Analysis
+1. Pick one city and category of your choice and group the
+businesses in that city or category by their overall star
+rating. Compare the businesses with 2-3 stars to the
+businesses with 4-5 stars and answer the following
+questions. Include your code.
+
+I chose two restaurants in Avon, the Mulligans Pub and
+Grill and Dervish Mediterranean & Turkish Grill.
+
+i. Do the two groups you chose to analyze have a different
+distribution of hours?
+
+No, both appear to have similar hours.
+
+ii. Do the two groups you chose to analyze have a different
+number of reviews?
+
+Both restaurants do appear to have a different number of
+reviews. The restaurant with the worse rating has more
+reviews.
+
+iii. Are you able to infer anything from the location data
+provided between these two groups? Explain.
+
+I can’t really infer anything based on location from the
+data provided. These restaurants may be in the same city
+but I can’t tell where they are, the community they’re in
+or the demographic of the area to see how that may affect
+the data.
+
+SQL code used for analysis:
+SELECT a.city, a.stars, a.review_count, a.name, b.hours
+FROM business AS a, hours AS b
+WHERE stars BETWEEN 2.0 AND 5.0 AND city = 'Avon'
+GROUP BY stars
+
+2. Group business based on the ones that are open and the
+ones that are closed. What differences can you find between
+the ones that are still open and the ones that are closed?
+
+List at least two differences and the SQL code you used to
+arrive at your answer.
+i. Difference 1:
+There were a lot of closures of restaurants in some of the
+same cities.
+ii. Difference 2:
+It looks like the businesses that were open were more
+likely to have more reviews than the businesses that were
+closed, even if the stars were just as verified.
+
+SQL code used for analysis:
+SELECT a.city, a.stars, a.review_count, a.is_open, b.category,
+b.business_id
+FROM business AS a, category AS b
+WHERE a.id = b.business_id
+GROUP BY business_id
+ORDER BY is_open DESC
+
+i. Indicate the type of analysis you chose to do:
+Predicting the number of fans someone will have based on
+the number of reviews they post.
+
+ii. Write 1-2 brief paragraphs on the type of data you will
+need for your analysis and why you chose that data:
+In order to predict the number of fans a user will have you
+will need a couple of different columns. 
+
+I chose to use every column from the user table just to view everything at
+once, but I’m primarily focusing on the review count,
+yelping_since, the number of fans, and if the review was
+useful. When playing around with the data, I noticed that
+the longer the user has been yelping and the greater their
+review count was, the more fans they were likely to have.
+Most of the top users had over 100 fans and received
+positive feedback on their reviews (useful, funny, cool,
+etc.).
+
+iii. Output of your finished dataset:
++-----------+--------------+---------------------
++--------+------+
+| name | review_count | yelping_since |
+useful | fans |
++-----------+--------------+---------------------
++--------+------+
+| Harald | 1153 | 2012-11-27 00:00:00 |
+122921 | 311 |
+| Christine | 930 | 2009-07-08 00:00:00 |
+4834 | 173 |
+| Mimi | 968 | 2011-03-30 00:00:00 |
+257 | 497 |
+| Cat | 377 | 2009-02-05 00:00:00 |
+1062 | 133 |
+| Fran | 862 | 2012-04-05 00:00:00 |
+9851 | 124 |
+| Amy | 609 | 2007-07-19 00:00:00 |
+3226 | 503 |
+| Mark | 861 | 2009-05-31 00:00:00 |
+4008 | 115 |
+| bernice | 255 | 2007-08-29 00:00:00 |
+120 | 105 |
+
+| Roanna | 1039 | 2006-03-28 00:00:00 |
+2995 | 104 |
+| Tiffany | 408 | 2008-10-28 00:00:00 |
+1366 | 111 |
+| William | 1215 | 2015-02-19 00:00:00 |
+9363 | 126 |
+| Lisa | 813 | 2009-10-05 00:00:00 |
+48 | 159 |
+| Gerald | 2000 | 2012-12-16 00:00:00 |
+17524 | 253 |
+| Angela | 694 | 2010-10-01 00:00:00 |
+158 | 101 |
+| .Hon | 1246 | 2006-07-19 00:00:00 |
+7850 | 101 |
+| Lissa | 834 | 2007-08-14 00:00:00 |
+455 | 120 |
++-----------+--------------+---------------------
++--------+------+
+iv. Provide the SQL code you used to create your final
+dataset:
+SELECT name, review_count, yelping_since, useful, fans
+FROM user
+WHERE fans >= 100;
