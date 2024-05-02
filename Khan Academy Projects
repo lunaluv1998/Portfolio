@@ -1,0 +1,98 @@
+/Project One/
+Create Table bookstore (id INTEGER PRIMARY KEY, name TEXT, copies INTEGER, aisle INTEGER, price_usd INTEGER); 
+INSERT INTO bookstore VALUES(1, "The Host", 5, 3, 12);
+INSERT INTO bookstore VALUES(2, "They Both Die at the End", 9, 7, 10);
+Insert into bookstore VALUES(3, "Howl at the Moon", 5, 9, 9);
+Insert into bookstore VALUES (4, "Gearbreakers", 8, 3, 13);
+Insert into bookstore VALUES(5, "Bloodlines", 10, 9, 14); 
+Select * from bookstore where copies > 5 order by price_usd; 
+Select sum(price_usd) from bookstore; 
+
+/Practice/
+
+CREATE TABLE student_grades (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    number_grade INTEGER,
+    fraction_completed REAL);
+    
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 90, 0.805);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 95, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winsteen", 85, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 66, 0.7054);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winster", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winstonia", 82, 0.9045);
+    
+select name, number_grade, ROUND(fraction_completed * 100) as percent_completed from student_grades; 
+
+select count(*), 
+CASE
+    WHEN number_grade >= 90 THEN 'A'
+    WHEN number_grade < 90 AND number_grade >= 80 THEN 'B'
+    WHEN number_grade < 80 AND number_grade >= 70 THEN 'C'
+    ELSE 'F'
+END as 'letter_grade'
+from student_grades
+GROUP BY letter_grade;
+
+
+/Project Two/
+
+CREATE TABLE badges (
+    date TEXT,
+    badge_type TEXT,
+    badge_name TEXT,
+    energy_points INTEGER
+);
+
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 04/12", "Sun", "Oracle", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 04/28", "Earth", "Incredible Inspiration", 5000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 01/29", "Challenge Patch", "Intro to JS: Drawing & Animation Mastery", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2014, 12/05", "Meteorite", "Thumbs Up", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 04/28", "Moon", "1000 Kelvin", 1000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 04/25", "Earth", "299,792,458 Meters per Second", 5000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 03/20", "Sun", "Da Vinci", 200000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 03/02", "Sun", "Newton", 150000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 03/02", "Sun", "Hypatia", 125000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 02/24", "Sun", "Kepler", 125000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 02/24", "Sun", "Copernicus", 80000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 02/07", "Sun", "Sally Ride", 35000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 01/06", "Sun", "Magellan", 30000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 02/24", "Earth", "Guru", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2014, 12/29", "Earth", "Work Horse", 14000);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2014, 10/20", "Moon", "Redwood", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2013, 10/20", "Meteorite", "Cypress", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 03/18", "Sun", "Millionaire", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 02/27", "Earth", "Five Times Ten to the Fifth", 0);
+INSERT INTO badges (date, badge_type, badge_name, energy_points) VALUES ("2015, 04/04", "Earth", "Investigator", 0);
+
+select avg(energy_points)
+from badges;
+
+select max(energy_points)
+from badges; 
+
+select min(energy_points)
+from badges; 
+
+select badge_type, energy_points, count(*),
+CASE 
+    When energy_points = 0 THEN "Doing poorly"
+    When energy_points > 0 AND energy_points <= 5000 THEN "Doing fair"
+    When energy_points > 5000 THEN "Doing well" 
+    END as Progress 
+from badges
+group by energy_points;
+
+select * from badges where badge_type LIKE '%M%';
+
+select * from badges where energy_points >= 5000 AND energy_points <=20000;
+
+
+/Project Three/
