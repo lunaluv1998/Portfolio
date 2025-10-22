@@ -1,0 +1,36 @@
+select *
+from fortune_companies;
+
+--Which companies have more than 15 PTO days and healthcare benefits?
+select company_name, healthcare_benefits, paid_time_off_days
+from fortune_companies
+where paid_time_off_days >=15 and healthcare_benefits = 1
+order by paid_time_off_days desc;
+
+--What is the average revenue for Technology companies with over 100,000 employees?
+select industry, employees, avg(revenue) as average_revenue
+from fortune_companies
+group by industry
+having employees > 100000;
+
+--Which companies are good places to work for people who want to have kids? Determine by places with healthcare benefits and 10+ weeks maternity leave.
+select company_name, healthcare_benefits, maternity_leave_weeks,
+case when maternity_leave_weeks >= 15 and healthcare_benefits = 1 then "excellent company"
+when maternity_leave_weeks >= 10 and healthcare_benefits = 1 then "good company"
+when maternity_leave_weeks >= 8 and healthcare_benefits = 1 then "mid company"
+else "bad company"
+end as "Company Status"
+from fortune_companies
+order by "Company Status"; 
+
+--Which industries have an average revenue of at least $200 Billion, and what are their avg revenues?
+SELECT industry, ROUND(AVG(revenue),1) as avg_revenue_billions
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_revenue_billions>=200
+order by avg_revenue_billions desc;
+
+--Which company makes the most revenue in the tech industry?
+select company_name, max(revenue), industry
+from fortune_companies
+where industry = "Technology";
