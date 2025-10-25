@@ -95,4 +95,4 @@ select * from badges where badge_type LIKE '%M%';
 select * from badges where energy_points >= 5000 AND energy_points <=20000;
 
 
-/Project Three/
+
